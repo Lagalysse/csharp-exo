@@ -18,28 +18,17 @@ namespace BllPalindrome
             {
                 string[] splitted = line.Split(',');
 
-                string cleaned = string.Empty;
-                int level = 0;
+                string cleannedString = splitted[0];
 
-                foreach (char c in splitted[0])
+                int indexOpenedBracket = cleannedString.IndexOf('(');
+                int indexClosedBracket = cleannedString.IndexOf(')');
+                int resultStringBrackets = indexClosedBracket - indexOpenedBracket;
+                if (indexOpenedBracket != -1 && indexClosedBracket > indexOpenedBracket)
                 {
-                    if (c == '(')
-                    {
-                        level++;
-                    }
-
-                    if (level == 0)
-                    {
-                        cleaned += c;
-                    }
-
-                    if (c == ')' && level > 0)
-                    {
-                        level--;
-                    }
+                    cleannedString = cleannedString.Remove(indexOpenedBracket, resultStringBrackets);
                 }
 
-                cleannedList.Add(cleaned.Trim());
+                cleannedList.Add(cleannedString.Trim());
             }
             
             return cleannedList;
