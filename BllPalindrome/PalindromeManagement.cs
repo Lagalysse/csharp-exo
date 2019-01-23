@@ -17,7 +17,29 @@ namespace BllPalindrome
             foreach (string line in readLines)
             {
                 string[] splitted = line.Split(',');
-                cleannedList.Add(splitted[0].Trim()); 
+
+                string cleaned = string.Empty;
+                int level = 0;
+
+                foreach (char c in splitted[0])
+                {
+                    if (c == '(')
+                    {
+                        level++;
+                    }
+
+                    if (level == 0)
+                    {
+                        cleaned += c;
+                    }
+
+                    if (c == ')' && level > 0)
+                    {
+                        level--;
+                    }
+                }
+
+                cleannedList.Add(cleaned.Trim());
             }
             
             return cleannedList;
